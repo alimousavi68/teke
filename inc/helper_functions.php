@@ -13,22 +13,28 @@ function enqueue_bootstrap()
 }
 
 add_action('admin_enqueue_scripts', 'enqueue_bootstrap');
-// function enqueue_bootstrap() {
-//     // بارگذاری استایل بوت‌استرپ
-//     wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
-//     // بارگذاری اسکریپت بوت‌استرپ
-//     wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array('jquery'), null, true);
-// }
+add_action('wp_enqueue_scripts', 'enqueue_bootstrap');
 
-// add_action('admin_enqueue_scripts', 'enqueue_bootstrap');
+function custom_theme_setup() {
+    // اضافه کردن پشتیبانی منو
+    add_theme_support('menus');
+    
+    // ثبت منوها
+    register_nav_menus(array(
+        'primary' => __('Primary Menu', 'textdomain'),
+        'footer' => __('Footer Menu', 'textdomain')
+    ));
+}
+add_action('after_setup_theme', 'custom_theme_setup');
 
-// // Enqueue Bootstrap CSS and JS in Admin Area
-// add_action( 'admin_enqueue_scripts', i8_enqueue_bootstrap());
-// function i8_enqueue_bootstrap() {
-//     wp_enqueue_style('bootstrap-css', plugins_url('assets/css/bootstrap.min.css', dirname(__FILE__)));
-//     wp_enqueue_script('bootstrap-js', plugins_url('assets/js/bootstrap.min.js', dirname(__FILE__)), array('jquery'), '5.2', true);
-//     // wp_add_inline_script('select2-js', 'jQuery(document).ready(function($) { $(".select2").select2(); });');
 
-// }
+function my_enqueue_scripts() {
+    wp_enqueue_script('jquery'); // اطمینان از بارگذاری jQuery
+    // wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/js/my-custom-script.js', array('jquery'), null, true);
+}
+add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
+
+
 
 
