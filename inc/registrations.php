@@ -89,10 +89,9 @@ function insert_event_registration($full_name, $sex, $code_meli, $mobile, $age, 
             }
         endforeach;
         return true;
-    elseif ($parent_id != false):
+    elseif ($result != false && $group_count == 0):
         return true;
-    else:
-        error_log('خطا در ثبت رزرو');
+    elseif ($result == false):
         return false;
     endif;
 }
@@ -114,38 +113,159 @@ function render_event_regostration_form($atts)
             </div>
         </div>
 
-        <div class="row g-1">
-            <div class="row g-1">
-                <div class="col-12 col-md-6 form-floating">
-                    <input type="text" name="full_name" id="full_name" class="form-control"
-                        placeholder="نام و نام خانوادگی">
-                    <label for="full_name">نام و نام خانوادگی: </label>
+        <div class="container d-flex flex-column gap-3">
+
+            <div class="border g-2 p-1 pb-4 ps-3 rounded-3 row" style="box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.10); ">
+                <div class="row g-2">
+                    <div class="col-12 col-md-6 form-floating">
+                        <input type="text" name="full_name" id="full_name" class="form-control"
+                            placeholder="نام و نام خانوادگی">
+                        <label for="full_name">نام و نام خانوادگی: </label>
+                    </div>
+                    <div class="col-12 col-md-6 form-floating">
+                        <input type="text" name="code_meli" id="code_meli" class="form-control" placeholder="1">
+                        <label for="code_meli">کد ملی: </label>
+                    </div>
                 </div>
-                <div class="col-12 col-md-6 form-floating">
-                    <input type="text" name="code_meli" id="code_meli" class="form-control" placeholder="1">
-                    <label for="code_meli">کد ملی: </label>
-                </div>
-            </div>
-            <div class="row g-1">
-                <div class="col-12 col-md-4 form-floating">
-                    <input type="number" min="1" max="100" name="age" id="age" class="form-control" placeholder="10">
-                    <label for="age">سـن: </label>
-                </div>
-                <div class="col-12 col-md-4 form-floating">
-                    <select name="sex" id="sex" class="form-select">
-                        <option value="0">خانم</option>
-                        <option value="1" selected>آقا</option>
-                    </select>
-                    <label for="sex">جنسیت: </label>
-                </div>
-                <div class="col-12 col-md-4 form-floating">
-                    <input type="text" name="mobile" id="mobile" class="form-control" placeholder="09121234567">
-                    <label for="mobile">شماره همراه: </label>
+
+                <div class="row g-2">
+                    <div class="col-12 col-md-4 form-floating">
+                        <input type="number" min="1" max="100" name="age" id="age" class="form-control" placeholder="10">
+                        <label for="age">سـن: </label>
+                    </div>
+                    <div class="col-12 col-md-4 form-floating">
+                        <select name="sex" id="sex" class="form-select">
+                            <option value="0">خانم</option>
+                            <option value="1" selected>آقا</option>
+                        </select>
+                        <label for="sex">جنسیت: </label>
+                    </div>
+                    <div class="col-12 col-md-4 form-floating">
+                        <input type="text" name="mobile" id="mobile" class="form-control" placeholder="09121234567">
+                        <label for="mobile">شماره همراه: </label>
+                    </div>
                 </div>
             </div>
 
-            <div id="companionContainer" class="p-2"></div>
-            <div class="row g-1">
+            <div class="row g-2" id="companionContainer"></div>
+
+            <div class="row g-2">
+                <div class="col-lg-4 col-sm-6">
+                    <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off" checked=""
+                        disabled>
+                    <label class="border btn d-flex overflow-hidden p-0 rounded-2 " for="option5">
+                        <div
+                            class="col-4 bg-danger p-2 d-flex flex-warp flex-column justify-content-center align-content-center text-white">
+                            <span class="" style="padding:5px;font-size:20px;font-weight:normal;">جمعه</span>
+                            <span class="" style="padding:5px;font-size:18px;font-weight:normal;">۱۲ تیر</span>
+
+                        </div>
+                        <div class="col-8 d-flex flex-column flex-wrap justify-content-center gap-1 justify-content-end"
+                            style="padding: 5px;font-size: 12px;font-weight:normal;text-align: right;padding-right: 15px;color: #666;">
+                            <span>۱۷:۰۰ الی ۲۲</span>
+                            <span>وضعیت: اتمام ظرفیت </span>
+                            <span>مکان: استادیوم هفت تیر</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="col-lg-4  col-sm-6">
+                    <input type="radio" class="btn-check" name="options-base" id="option6" autocomplete="off" checked="">
+                    <label class="border btn d-flex overflow-hidden p-0 rounded-2 " for="option6">
+                        <div
+                            class="col-4 bg-success p-2 d-flex flex-warp flex-column justify-content-center align-content-center text-white">
+                            <span class="" style="padding:5px;font-size:20px;font-weight:normal;">جمعه</span>
+                            <span class="" style="padding:5px;font-size:18px;font-weight:normal;">۱۲ تیر</span>
+
+                        </div>
+                        <div class="col-8 d-flex flex-column flex-wrap justify-content-center gap-1 justify-content-end"
+                            style="padding: 5px;font-size: 12px;font-weight:normal;text-align: right;padding-right: 15px;color: #666;">
+                            <span>۱۷:۰۰ الی ۲۲</span>
+                            <span>وضعیت: ظرفیت دارد</span>
+                            <span>مکان: استادیوم هفت تیر</span>
+                        </div>
+                    </label>
+                </div>
+
+
+                <div class="col-lg-4  col-sm-6">
+                    <input type="radio" class="btn-check" name="options-base" id="option7" autocomplete="off" checked="">
+                    <label class="border btn d-flex overflow-hidden p-0 rounded-2 " for="option7">
+                        <div
+                            class="col-4 bg-success p-2 d-flex flex-warp flex-column justify-content-center align-content-center text-white">
+                            <span class="" style="padding:5px;font-size:20px;font-weight:normal;">جمعه</span>
+                            <span class="" style="padding:5px;font-size:18px;font-weight:normal;">۱۲ تیر</span>
+
+                        </div>
+                        <div class="col-8 d-flex flex-column flex-wrap justify-content-center gap-1 justify-content-end"
+                            style="padding: 5px;font-size: 12px;font-weight:normal;text-align: right;padding-right: 15px;color: #666;">
+                            <span>۱۷:۰۰ الی ۲۲</span>
+                            <span>وضعیت: ظرفیت دارد</span>
+                            <span>مکان: استادیوم هفت تیر</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="col-lg-4  col-sm-6">
+                    <input type="radio" class="btn-check" name="options-base" id="option8" autocomplete="off" checked="">
+                    <label class="border btn d-flex overflow-hidden p-0 rounded-2 " for="option8">
+                        <div
+                            class="col-4 bg-success p-2 d-flex flex-warp flex-column justify-content-center align-content-center text-white">
+                            <span class="" style="padding:5px;font-size:20px;font-weight:normal;">جمعه</span>
+                            <span class="" style="padding:5px;font-size:18px;font-weight:normal;">۱۲ تیر</span>
+
+                        </div>
+                        <div class="col-8 d-flex flex-column flex-wrap justify-content-center gap-1 justify-content-end"
+                            style="padding: 5px;font-size: 12px;font-weight:normal;text-align: right;padding-right: 15px;color: #666;">
+                            <span>۱۷:۰۰ الی ۲۲</span>
+                            <span>وضعیت: ظرفیت دارد</span>
+                            <span>مکان: استادیوم هفت تیر</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="col-lg-4  col-sm-6">
+                    <input type="radio" class="btn-check" name="options-base" id="option9" autocomplete="off" checked="">
+                    <label class="border btn d-flex overflow-hidden p-0 rounded-2 " for="option9">
+                        <div
+                            class="col-4 bg-success p-2 d-flex flex-warp flex-column justify-content-center align-content-center text-white">
+                            <span class="" style="padding:5px;font-size:20px;font-weight:normal;">جمعه</span>
+                            <span class="" style="padding:5px;font-size:18px;font-weight:normal;">۱۲ تیر</span>
+
+                        </div>
+                        <div class="col-8 d-flex flex-column flex-wrap justify-content-center gap-1 justify-content-end"
+                            style="padding: 5px;font-size: 12px;font-weight:normal;text-align: right;padding-right: 15px;color: #666;">
+                            <span>۱۷:۰۰ الی ۲۲</span>
+                            <span>وضعیت: ظرفیت دارد</span>
+                            <span>مکان: استادیوم هفت تیر</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="col-lg-4  col-sm-6">
+                    <input type="radio" class="btn-check" name="options-base" id="option10" autocomplete="off" checked="">
+                    <label class="border btn d-flex overflow-hidden p-0 rounded-2 " for="option10">
+                        <div
+                            class="col-4 bg-success p-2 d-flex flex-warp flex-column justify-content-center align-content-center text-white">
+                            <span class="" style="padding:5px;font-size:20px;font-weight:normal;">جمعه</span>
+                            <span class="" style="padding:5px;font-size:18px;font-weight:normal;">۱۲ تیر</span>
+
+                        </div>
+                        <div class="col-8 d-flex flex-column flex-wrap justify-content-center gap-1 justify-content-end"
+                            style="padding: 5px;font-size: 12px;font-weight:normal;text-align: right;padding-right: 15px;color: #666;">
+                            <span>۱۷:۰۰ الی ۲۲</span>
+                            <span>وضعیت: ظرفیت دارد</span>
+                            <span>مکان: استادیوم هفت تیر</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row g-2">
                 <div class="col-12 col-lg-6">
                     <button type="button" class="btn btn-outline-success btn-lg w-100" onclick="addCompanion()">اضافه کردن
                         همراه</button>
@@ -166,31 +286,31 @@ function render_event_regostration_form($atts)
             const index = container.children.length;
 
             const html = `
-                                                            <div class="row g-1 my-3 p-3 alert alert-success bg-light alert-dismissible fade show border border-success" id="companion-${index}">
-                                                                <span class="mb-2 h4 text-success">همـراه</span>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="remove" onclick="removeCompanion(${index})"></button>
+                                                                                                                    <div class="row g-1 my-3 p-3 alert alert-success bg-light alert-dismissible fade show border " id="companion-${index}">
+                                                                                                                        <span class="mb-2 h4 text-success">همـراه</span>
+                                                                                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="remove" onclick="removeCompanion(${index})"></button>
 
-                                                                <div class="col-12 form-floating">
-                                                                    <input type="text" name="companion_full_name[${index}]" class="form-control" placeholder="نام و نام خانوادگی همراه">
-                                                                    <label>نام و نام خانوادگی همراه: </label>
-                                                                </div>
-                                                                <div class="col-12 col-md-4 form-floating">
-                                                                    <input type="text" name="companion_code_meli[${index}]" class="form-control" placeholder="کد ملی همراه">
-                                                                    <label>کد ملی همراه: </label>
-                                                                </div>
-                                                                <div class="col-12 col-md-4 form-floating">
-                                                                    <select name="companion_sex[${index}]" class="form-select">
-                                                                        <option value="0">خانم</option>
-                                                                        <option value="1">آقا</option>
-                                                                    </select>
-                                                                    <label>جنسیت همراه: </label>
-                                                                </div>
-                                                                <div class="col-12 col-md-4 form-floating">
-                                                                    <input type="number" min="1" max="100" name="companion_age[${index}]" class="form-control" placeholder="سن همراه">
-                                                                    <label>سـن همراه: </label>
-                                                                </div>
-                                                            </div>
-                                                        `;
+                                                                                                                        <div class="col-12 form-floating">
+                                                                                                                            <input type="text" name="companion_full_name[${index}]" class="form-control" placeholder="نام و نام خانوادگی همراه">
+                                                                                                                            <label>نام و نام خانوادگی همراه: </label>
+                                                                                                                        </div>
+                                                                                                                        <div class="col-12 col-md-4 form-floating">
+                                                                                                                            <input type="text" name="companion_code_meli[${index}]" class="form-control" placeholder="کد ملی همراه">
+                                                                                                                            <label>کد ملی همراه: </label>
+                                                                                                                        </div>
+                                                                                                                        <div class="col-12 col-md-4 form-floating">
+                                                                                                                            <select name="companion_sex[${index}]" class="form-select">
+                                                                                                                                <option value="0">خانم</option>
+                                                                                                                                <option value="1">آقا</option>
+                                                                                                                            </select>
+                                                                                                                            <label>جنسیت همراه: </label>
+                                                                                                                        </div>
+                                                                                                                        <div class="col-12 col-md-4 form-floating">
+                                                                                                                            <input type="number" min="1" max="100" name="companion_age[${index}]" class="form-control" placeholder="سن همراه">
+                                                                                                                            <label>سـن همراه: </label>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                `;
 
             container.insertAdjacentHTML('beforeend', html);
         }
@@ -292,11 +412,11 @@ function render_event_regostration_form($atts)
 
             function showToast(type, message, container) {
                 var toastHTML = `<div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                                                    <div class="d-flex">
-                                                        <div class="toast-body">${message}</div>
-                                                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                                                    </div>
-                                                </div>`;
+                                                                                                            <div class="d-flex">
+                                                                                                                <div class="toast-body">${message}</div>
+                                                                                                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                                                                                            </div>
+                                                                                                        </div>`;
 
                 $(container).append(toastHTML);
                 var toastEl = $(container + ' .toast').last();
@@ -309,6 +429,18 @@ function render_event_regostration_form($atts)
 
     </script>
 
+    <style>
+        .btn-check:checked+.btn,
+        .btn.active,
+        .btn.show,
+        .btn:first-child:active,
+        :not(.btn-check)+.btn:active {
+            color: var(--bs-btn-active-color);
+            background-color: var(--bs-btn-active-bg);
+            border-color: var(--bs-secondary-color) !important;
+            border-width: 1px !important;
+        }
+    </style>
     <?php
     return ob_get_clean();
 
@@ -368,16 +500,18 @@ function i8_proccess_registration_form_data()
     }
     // پردازش داده‌های هر همراه
     for ($i = 0; $i < $companion_count; $i++) {
-        if (is_registered($sub_code_meli) > 0) {
-            wp_send_json_error(['message' => 'کد ملی  ' . $sub_code_meli . ' از قبل وجود دارد.']);
-            wp_die();
-            return;
-        }
+
 
         $sub_full_name = sanitize_text_field($_POST['companion_full_name'][$i]);
         $sub_code_meli = sanitize_text_field($_POST['companion_code_meli'][$i]);
         $sub_sex = sanitize_text_field($_POST['companion_sex'][$i]);
         $sub_age = sanitize_text_field($_POST['companion_age'][$i]);
+
+        if (is_registered($sub_code_meli) > 0) {
+            wp_send_json_error(['message' => 'کد ملی  ' . $sub_code_meli . ' از قبل وجود دارد.']);
+            wp_die();
+            return;
+        }
 
         // افزودن همراه به آرایه $companions اگر تمام فیلدها پر شده باشند
         // if (!empty($full_name) && !empty($code_meli) && !empty($sex) && !empty($age)) {
@@ -409,14 +543,22 @@ function i8_proccess_registration_form_data()
 function is_registered($code_meli)
 {
     global $wpdb;
-$table_name = $wpdb->prefix . 'i8_event_registrations';
+    $table_name = $wpdb->prefix . 'i8_event_registrations';
 
-$sql = $wpdb->prepare(
-    "SELECT COUNT(*) FROM $table_name WHERE code_meli = $code_meli"
-    
-);
+    // استفاده صحیح از $wpdb->prepare
+    $sql = $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE code_meli = %s", $code_meli);
 
-    // اجرای کوئری
-    $result = $wpdb->query($sql);
-    return $result;
+    // استفاده از get_var برای دریافت یک مقدار
+    $count = $wpdb->get_var($sql);
+
+    // بررسی خطا
+    if ($count === null) {
+        // مدیریت خطا
+        error_log("خطا در اجرای کوئری: " . $wpdb->last_error);
+        return false;
+    }
+
+    return intval($count);
+
+
 }

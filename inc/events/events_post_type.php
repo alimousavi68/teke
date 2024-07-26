@@ -72,30 +72,32 @@ function render_custom_meta_fields($post)
     ?>
 
 
-    <div class="row p-2">
-        <div class="col-xl-4 col-12 ">
-            <label for="floatingTextarea">تاریخ برگزاری </label>
-            <input type="date" name="i8_event_date" id="" value="<?php echo $i8_event_date; ?>"
-                class="form-control form-control-lg">
+    <div class="container row">
+        <div class="col-12 col-md-6 row">
+            <div class="row p-2">
+                <div class="col-xl-4 col-12 ">
+                    <label for="floatingTextarea">تاریخ برگزاری </label>
+                    <input type="date" name="i8_event_date" id="" value="<?php echo $i8_event_date; ?>"
+                        class="form-control form-control-lg">
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col-xl-4 col-12 ">
+                    <label for="floatingTextarea">ظرفیت برگزاری</label>
+                    <input type="number" name="i8_event_capacity" id="" min="0" value="<?php echo $i8_event_capacity; ?>"
+                        class="form-control form-control-lg">
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 row p-2">
+            <div class="col-12">
+                <label for="floatingTextarea2">توضیحات</label>
+                <textarea class="form-control" name="i8_event_descriptions"
+                    placeholder="توضیحات رویداد را در اینجا وارد کنید"
+                    style="height: 200px"><?php echo $i8_event_descriptions; ?></textarea>
+            </div>
         </div>
     </div>
-    <div class="row p-2">
-        <div class="col-xl-4 col-12 ">
-            <label for="floatingTextarea">ظرفیت برگزاری</label>
-            <input type="number" name="i8_event_capacity" id="" min="0" value="<?php echo $i8_event_capacity; ?>"
-                class="form-control form-control-lg">
-        </div>
-    </div>
-    <div class="row p-2">
-        <div class="col-12">
-            <label for="floatingTextarea2">توضیحات</label>
-            <textarea class="form-control" name="i8_event_descriptions" placeholder="توضیحات رویداد را در اینجا وارد کنید"
-                style="height: 200px"><?php echo $i8_event_descriptions; ?></textarea>
-        </div>
-    </div>
-
-
-
     <?php
 }
 
@@ -125,3 +127,5 @@ function save_custom_meta_fields($post_id)
     }
 
 }
+
+

@@ -15,7 +15,8 @@ define( 'TEKE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 // Includes File
 require_once( plugin_dir_path( __FILE__ ) . 'inc/helper_functions.php');
-require_once( plugin_dir_path( __FILE__ ) . 'inc/events_post_type.php');
+require_once( plugin_dir_path( __FILE__ ) . 'inc/events/events_post_type.php');
+require_once( plugin_dir_path( __FILE__ ) . 'inc/events/event_days.php');
 require_once( plugin_dir_path( __FILE__ ) . 'inc/registrations.php');
 
 
