@@ -12,8 +12,8 @@ function enqueue_bootstrap()
     <?php
 }
 
-add_action('admin_enqueue_scripts', 'enqueue_bootstrap');
-add_action('wp_enqueue_scripts', 'enqueue_bootstrap');
+// add_action('admin_enqueue_scripts', 'enqueue_bootstrap');
+// add_action('wp_enqueue_scripts', 'enqueue_bootstrap');
 
 function custom_theme_setup() {
     // اضافه کردن پشتیبانی منو
@@ -33,6 +33,7 @@ function my_enqueue_scripts() {
     // wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/js/my-custom-script.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
+
 
 
 
