@@ -58,42 +58,8 @@ function add_shortcode_after_content($content)
 
             <div class=" d-flex flex-column gap-3 pb-5">
 
-                <div class="border g-2 gap-3 py-3 rounded-3 row" style="box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.10); ">
-                    <div class="row g-2">
-                        <div class="col-12 col-md-6 form-floating">
-                            <input type="text" name="full_name" id="full_name" class="form-control"
-                                placeholder="نام و نام خانوادگی">
-                            <label for="full_name">نام و نام خانوادگی: </label>
-                        </div>
-                        <div class="col-12 col-md-6 form-floating">
-                            <input type="text" name="code_meli" id="code_meli" class="form-control" placeholder="1">
-                            <label for="code_meli">کد ملی: </label>
-                        </div>
-                    </div>
 
-                    <div class="row g-2">
-                        <div class="col-12 col-md-4 form-floating">
-                            <input type="number" min="1" max="100" name="age" id="age" class="form-control" placeholder="10">
-                            <label for="age">سـن: </label>
-                        </div>
-                        <div class="col-12 col-md-4 form-floating">
-                            <select name="sex" id="sex" class="form-select">
-                                <option value="0">خانم</option>
-                                <option value="1" selected>آقا</option>
-                            </select>
-                            <label for="sex">جنسیت: </label>
-                        </div>
-                        <div class="col-12 col-md-4 form-floating">
-                            <input type="text" name="mobile" id="mobile" class="form-control" placeholder="09121234567">
-                            <label for="mobile">شماره همراه: </label>
-                        </div>
-                        <input type="hidden" name="event_id" value="<?php the_ID(); ?>">
-                    </div>
-                </div>
-
-                <div class="row g-2" id="companionContainer"></div>
-
-                <div class="row g-2">
+            <div class="row g-2">
                     <?php
                     $event_day = get_the_ID();
                     $all_event_days = get_event_days_by_event_id($event_day);
@@ -124,11 +90,46 @@ function add_shortcode_after_content($content)
 
                 </div>
 
+                <div class="border g-2 gap-3 py-3 rounded-3 row justify-content-center" style="box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.10); ">
+                    <div class="row g-2 row-gap-3">
+                        <div class="col-12 col-md-6 form-floating">
+                            <input type="text" name="full_name" id="full_name" class="form-control"
+                                placeholder="نام و نام خانوادگی">
+                            <label for="full_name">نام و نام خانوادگی: </label>
+                        </div>
+                        <div class="col-12 col-md-6 form-floating">
+                            <input type="text" name="code_meli" id="code_meli" class="form-control" placeholder="1">
+                            <label for="code_meli">کد ملی: </label>
+                        </div>
+                    </div>
+
+                    <div class="row g-2 row-gap-3">
+                        <div class="col-12 col-md-4 form-floating">
+                            <input type="number" min="1" max="100" name="age" id="age" class="form-control" placeholder="10">
+                            <label for="age">سـن: </label>
+                        </div>
+                        <div class="col-12 col-md-4 form-floating">
+                            <select name="sex" id="sex" class="form-select">
+                                <option value="0">خانم</option>
+                                <option value="1" selected>آقا</option>
+                            </select>
+                            <label for="sex">جنسیت: </label>
+                        </div>
+                        <div class="col-12 col-md-4 form-floating">
+                            <input type="text" name="mobile" id="mobile" class="form-control" placeholder="09121234567">
+                            <label for="mobile">شماره همراه: </label>
+                        </div>
+                        <input type="hidden" name="event_id" value="<?php the_ID(); ?>">
+                    </div>
+                </div>
+
+                <div class="row g-2 d-flex justify-content-center" id="companionContainer"></div>
 
 
 
 
-                <div class="row g-2">
+
+                <div class="row g-2 row-gap-3">
                     <div class="col-12 col-lg-6">
                         <button type="button" class="btn btn-outline-success btn-lg w-100" onclick="addCompanion()">اضافه کردن
                             همراه</button>
