@@ -56,7 +56,7 @@ function add_shortcode_after_content($content)
                 </div>
             </div>
 
-            <div class=" d-flex flex-column gap-3">
+            <div class=" d-flex flex-column gap-3 pb-5">
 
                 <div class="border g-2 gap-3 py-3 rounded-3 row" style="box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.10); ">
                     <div class="row g-2">
