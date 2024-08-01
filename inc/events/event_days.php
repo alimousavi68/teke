@@ -139,6 +139,49 @@ function save_event_days_data($post_id, $post, $update)
 }
 
 
+function get_capacity_is_fill($event_id, $event_day_id)
+{
+    global $wpdb;
+    // event day capacity
+    $event_day_table_name = $wpdb->prefix . 'event_days';
+    $event_day_query = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT * FROM $event_day_table_name WHERE event_id = %d AND id = %d",
+            $event_id,
+            $event_day_id
+        )
+    );
+
+    if (!empty($event_day_query)) {
+        $event_day_capacity = $event_day_query[0]->capacity;
+    } else {
+        $event_day_capacity = 0;
+    }
+
+    error_log('capacity for a day: ' . print_r($event_day_capacity, true));
+
+    // refisteration person in a event id and event day
+    $registration_table_name = $wpdb->prefix . 'i8_event_registrations';
+    $count_registration_for_a_event_day = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT COUNT(*) FROM $registration_table_name WHERE event_id = %d AND event_day_id = %d",
+            $event_id,
+            $event_day_id
+        )
+    );
+
+    error_log('resiteriation for a day: ' . $count_registration_for_a_event_day);
+
+    // compare capacity with count of resitration
+
+    if ($count_registration_for_a_event_day >= $event_day_capacity) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 
 
 
